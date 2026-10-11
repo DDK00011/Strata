@@ -73,6 +73,8 @@
       "@media(max-width:900px){.st-header #lang-select{display:none}}@media(max-width:520px){.controls #lang-select{display:none}}" +
       // longer labels in other languages (Мониторинг, Pemantau...) need a tighter header on phones; English keeps its layout
       "@media(max-width:480px){html:not([lang=\"en\"]) .st-header{gap:4px;padding:0 6px}html:not([lang=\"en\"]) .st-tab{padding:0 6px;font-size:12.5px}}" +
+      // API Monitor on a wide screen: the search hint is longer than "Search ID or endpoint" in most languages (it was cut off)
+      "@media(min-width:601px){html:not([lang=\"en\"]) #search{width:260px}}" +
       // API Monitor on a phone: a long status filter (すべてのステータス) must not push the search box out of the panel
       "@media(max-width:600px){html:not([lang=\"en\"]) .filters{width:100%}html:not([lang=\"en\"]) #search{flex:1 1 0;min-width:0;width:auto}" +
       "html:not([lang=\"en\"]) .filters select{max-width:46%;min-width:0;text-overflow:ellipsis}}";
