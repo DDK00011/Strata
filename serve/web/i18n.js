@@ -70,7 +70,9 @@
     s.textContent = ".lang-select{height:36px;max-width:140px;padding:0 8px;border-radius:10px;border:1.5px solid var(--st-line);" +
       "background:var(--st-surface);color:var(--st-ink-muted);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer}" +
       ".lang-select:hover{background:var(--st-surface-2);color:var(--st-ink)}" +
-      "@media(max-width:800px){.st-header #lang-select{display:none}}@media(max-width:520px){.controls #lang-select{display:none}}";
+      "@media(max-width:900px){.st-header #lang-select{display:none}}@media(max-width:520px){.controls #lang-select{display:none}}" +
+      // longer labels in other languages (Мониторинг, Pemantau...) need a tighter header on phones; English keeps its layout
+      "@media(max-width:480px){html:not([lang=\"en\"]) .st-header{gap:4px;padding:0 6px}html:not([lang=\"en\"]) .st-tab{padding:0 6px;font-size:12.5px}}";
     document.head.appendChild(s);
   }
   function fillPicker(sel) {
