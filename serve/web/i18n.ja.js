@@ -54,7 +54,7 @@ window.STRATA_I18N["ja"] = {
   "toast.keyNeeded": "APIキーが必要です",
   "toast.keyNeeded.sub": "このサーバーにはキーが必要です。概要 > 設定から追加してください。",
   "toast.requestFailed": "リクエストが失敗しました",
-  "toast.stillWriting": "書き込み中",
+  "toast.stillWriting": "まだ書き込み中です",
   "toast.stillWriting.sub": "先に応答を停止してください。",
   "toast.newChat": "新しいチャット",
   "toast.newChat.sub": "前回のチャットをクリアしました。",
@@ -145,7 +145,7 @@ window.STRATA_I18N["ja"] = {
   "monitor.sub.expertsCached": "エキスパート {n} 個をキャッシュ済み",
   "monitor.sub.gpuNa": "利用不可",
   "monitor.sub.gpuNoteWinAmd": "Windows AMD では未対応",
-  "monitor.sub.powerLimit": "上限 {n} W 中",
+  "monitor.sub.powerLimit": "上限 {n} W",
   "monitor.sub.pcieRx": "GPUへ {n} MB/s",
   "monitor.sub.pcieIdle": " · アイドル Gen{n}",
   "monitor.sub.cpu": "{cores} コア · {threads} スレッド",
@@ -188,7 +188,7 @@ window.STRATA_I18N["ja"] = {
   "monitor.cc.note.on": "退避中の会話を再開するリクエストは、再度読み込む代わりにその状態を復元します。スロットまたはメモリがいっぱいになると、最も古いものが破棄されます。",
   "monitor.cc.note.off": "エンジンは直前の会話の状態を保持するため、それに続くリクエストは新しい部分のみを読み込みます。複数の会話を保持する (エージェントが交代で行うなど) には、実行設定の args に \"--conversation-cache-mib\", \"8192\" を追加してください (docs/DETAILS.md)。",
   "monitor.mcp.title": "MCPサーバー",
-  "monitor.mcp.note": "モデルがツールの呼び出しを決定すると、ツールはお使いの権限でこのPC上で実行されます (このページのチャットのみ。サンプリングで無効化できます)。",
+  "monitor.mcp.note": "モデルがツールの呼び出しを決定すると、ツールはユーザー権限でこのPC上で実行されます (このページのチャットのみ。サンプリングで無効化できます)。",
   "monitor.mcp.sum": "{tools} 個のツール · サーバー {total} 台中 {ready} 台が接続済み",
   "monitor.mcp.tools": "{n} 個のツール",
   "monitor.totals": "{since} 以降: {requests} 件のリクエスト · プロンプト {read} トークン読み込み{pSpeed} ({reused} 再利用) · {written} 書き込み{oSpeed}",
@@ -207,7 +207,7 @@ window.STRATA_I18N["ja"] = {
   "req.esp.title": "実験的な速度プロジェクション {state}",
   "req.esp.esp": "ESP",
   "req.esp.stock": "標準",
-  "req.pcie.title": "GPUがPCIe経由で読み込んだ（--pcie-frac）か別のGPUが計算したルーティング済みエキスパート",
+  "req.pcie.title": "GPUがPCIe経由で読み込んだ (--pcie-frac) か、別のGPUが計算したルーティング済みエキスパート",
 
   // tool calls in an answer
   "tool.state.writing": "書き込み中",
@@ -314,7 +314,7 @@ window.STRATA_I18N["ja"] = {
   "drawer.mcp.sub.tools": "{names} からのツール {n} 個。モデルが必要と判断したときに呼び出します",
   "drawer.mcp.sub.none": "まだ接続されているサーバーはありません（モニターを参照）",
   "drawer.esp": "実験的な速度プロジェクション",
-  "drawer.esp.sub": "エンジンの制御ベクトル。オフ = stockモデル。切り替えるとチャットをもう一度読み込みます",
+  "drawer.esp.sub": "エンジンの制御ベクトル。オフ = 標準モデル。切り替えるとチャットをもう一度読み込みます",
   "drawer.share": "他のアプリにも適用",
   "drawer.share.sub": "ompやその他のAPIクライアントは、自身で設定していない項目にこれらの設定を使用します",
 
@@ -345,7 +345,7 @@ window.STRATA_I18N["ja"] = {
   "apimon.card.speed": "前回デコード速度",
   "apimon.card.wall.sub": "キュー待機とモデル読み込みを含みます",
   "apimon.card.speed.sub": "エンジン計測値 · トークン / 秒",
-  "apimon.waitingServer": "サーバーの待機中",
+  "apimon.waitingServer": "サーバーを待機中",
   "apimon.requests": "リクエスト",
   "apimon.search.aria": "リクエストをフィルター",
   "apimon.search.placeholder": "IDまたはエンドポイントを検索",
@@ -405,6 +405,6 @@ window.STRATA_I18N["ja"] = {
   "apimon.state.idle": "アイドル",
   "apimon.state.loading": "読み込み中",
   "apimon.state.queued": "待機中",
-  "apimon.state.reading": "読み込み中",
+  "apimon.state.reading": "プロンプトを読み込み中",
   "apimon.state.unloaded": "アンロード済み"
 };

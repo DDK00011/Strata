@@ -316,7 +316,7 @@ window.STRATA_I18N["pt-BR"] = {
   "drawer.esp": "Projeção de velocidade experimental",
   "drawer.esp.sub": "o vetor de controle do motor; desativado = o modelo padrão. Alternar lê o chat novamente uma vez",
   "drawer.share": "Usar também para outros aplicativos",
-  "drawer.share.sub": "o omp e outros clientes de API usam estas configurações para tudo o que não definirem por conta própria",
+  "drawer.share.sub": "O omp e outros clientes de API usam estas configurações para tudo o que não definirem por conta própria",
 
   // engine phases (Monitor state label)
   "phase.thinking": "Pensamento",
@@ -344,7 +344,7 @@ window.STRATA_I18N["pt-BR"] = {
   "apimon.card.wall": "Último tempo decorrido",
   "apimon.card.speed": "Última velocidade de decodificação",
   "apimon.card.wall.sub": "Inclui fila e carregamento do modelo",
-  "apimon.card.speed.sub": "Tempo do engine · tokens / segundo",
+  "apimon.card.speed.sub": "Tempo da engine · tokens / segundo",
   "apimon.waitingServer": "Aguardando servidor",
   "apimon.requests": "Requisições",
   "apimon.search.aria": "Filtrar requisições",
