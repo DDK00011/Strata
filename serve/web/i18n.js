@@ -5,8 +5,8 @@
 (function () {
   var DICTS = window.STRATA_I18N = window.STRATA_I18N || {};
   // <languages:begin> the picker order and names - rewritten by wire_ui.py
-  var available = ["en", "zh-CN", "ja", "ko", "vi", "id"];
-  var NAMES = {"en": "English", "zh-CN": "简体中文", "ja": "日本語", "ko": "한국어", "vi": "Tiếng Việt", "id": "Bahasa Indonesia"};
+  var available = ["en", "zh-CN", "zh-TW", "ja", "ko", "vi", "id", "es", "pt-BR", "de", "fr", "ru", "it", "tr"];
+  var NAMES = {"en": "English", "zh-CN": "简体中文", "zh-TW": "繁體中文", "ja": "日本語", "ko": "한국어", "vi": "Tiếng Việt", "id": "Bahasa Indonesia", "es": "Español", "pt-BR": "Português (Brasil)", "de": "Deutsch", "fr": "Français", "ru": "Русский", "it": "Italiano", "tr": "Türkçe"};
   // <languages:end>
   var STORAGE_KEY = "strata.lang";
 
