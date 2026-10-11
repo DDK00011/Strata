@@ -33,7 +33,7 @@
     <span class="st-pill__dot"></span><span id="pill-text" data-i18n="common.connecting">Connecting&hellip;</span></span>
   <button class="st-btn st-btn--icon" id="theme-btn" title="Light / dark" aria-label="Switch between light and dark" data-i18n-title="theme.title" data-i18n-aria="theme.aria">
     <svg class="st-icon"><use id="theme-icon" href="web/sprite.svg#i-moon"/></svg></button>
-  <button class="st-btn st-btn--icon" id="lang-btn" title="Switch language" aria-label="Switch language" data-i18n-title="lang.switch" data-i18n-aria="lang.switch">中</button>
+  <select class="lang-select" id="lang-select" title="Switch language" aria-label="Switch language" data-i18n-title="lang.switch" data-i18n-aria="lang.switch"></select>
 </header>
 
 <main>
@@ -172,6 +172,7 @@
         </div>
         <div class="toggle-row"><span data-i18n="about.dark">Dark theme</span>
           <button class="st-toggle" id="dark-toggle" role="switch" aria-checked="false" aria-label="Dark theme" data-i18n-aria="about.dark"></button></div>
+        <div class="toggle-row"><span data-i18n="lang.switch">Switch language</span><select class="lang-select" id="lang-select-about" aria-label="Switch language" data-i18n-aria="lang.switch"></select></div>
         <p class="muted small" data-i18n-html="about.keep">Chats, settings and the key are kept in this browser only.
           <a href="https://github.com/Niko1221/Strata" target="_blank" rel="noopener noreferrer">Strata on GitHub</a></p>
       </div>
@@ -240,9 +241,15 @@
 </aside>
 <div class="scrim" id="scrim" hidden></div>
 <div class="st-toasts" id="toasts" aria-live="polite"></div>
+<!-- i18n:begin -->
 <script src="web/i18n.en.js"></script>
 <script src="web/i18n.zh-CN.js"></script>
+<script src="web/i18n.ja.js"></script>
+<script src="web/i18n.ko.js"></script>
+<script src="web/i18n.vi.js"></script>
+<script src="web/i18n.id.js"></script>
 <script src="web/i18n.js"></script>
+<!-- i18n:end -->
 <script src="web/app.js"></script>
 </body>
 </html>

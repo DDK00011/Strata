@@ -1,10 +1,13 @@
-// serve/web/i18n.js - the tiny i18n runtime. Loaded last of the three i18n scripts.
-// Dictionaries live in window.STRATA_I18N["en"] / ["zh-CN"] (i18n.en.js, i18n.zh-CN.js).
-// Public API: window.StrataI18N = {lang, available, t, apply, setLang, onChange}.
+// serve/web/i18n.js - the tiny i18n runtime. Loaded last of the i18n scripts (after the dictionaries).
+// Dictionaries live in window.STRATA_I18N["<code>"] (i18n.<code>.js); English is the fallback, then the key itself.
+// Public API: window.StrataI18N = {lang, available, names, t, apply, setLang, onChange}.
 "use strict";
 (function () {
   var DICTS = window.STRATA_I18N = window.STRATA_I18N || {};
-  var available = ["en", "zh-CN"];
+  // <languages:begin> the picker order and names - rewritten by wire_ui.py
+  var available = ["en", "zh-CN", "ja", "ko", "vi", "id"];
+  var NAMES = {"en": "English", "zh-CN": "简体中文", "ja": "日本語", "ko": "한국어", "vi": "Tiếng Việt", "id": "Bahasa Indonesia"};
+  // <languages:end>
   var STORAGE_KEY = "strata.lang";
 
   function readStored() {
@@ -13,11 +16,33 @@
   function writeStored(value) {
     try { localStorage.setItem(STORAGE_KEY, value); } catch (e) { /* private mode: in memory only */ }
   }
+
+  // one browser language tag ("pt-BR", "zh-Hant-TW", "id") -> one of ours, or null
+  function fromBrowser(tag) {
+    var t = String(tag || "").toLowerCase().replace("_", "-");
+    var primary = t.split("-")[0];
+    if (primary === "en") return "en";
+    for (var i = 0; i < available.length; i++) {
+      if (available[i].toLowerCase() === t) return available[i];
+    }
+    if (primary === "zh") {
+      if (/hant|-tw|-hk|-mo/.test(t) && available.indexOf("zh-TW") >= 0) return "zh-TW";
+      return available.indexOf("zh-CN") >= 0 ? "zh-CN" : null;
+    }
+    if (primary === "pt") return available.indexOf("pt-BR") >= 0 ? "pt-BR" : null;
+    if (primary === "in") primary = "id";
+    return available.indexOf(primary) >= 0 ? primary : null;
+  }
+  // the saved choice, else the first of the browser's languages that we have (an English one ends the search), else English
   function detect() {
     var saved = readStored();
     if (available.indexOf(saved) >= 0) return saved;
-    var nav = (navigator.languages && navigator.languages[0]) || navigator.language || "";
-    return String(nav).toLowerCase().indexOf("zh") === 0 ? "zh-CN" : "en";
+    var prefs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ""];
+    for (var i = 0; i < prefs.length; i++) {
+      var found = fromBrowser(prefs[i]);
+      if (found) return found;
+    }
+    return "en";
   }
 
   var lang = detect();
@@ -36,20 +61,39 @@
     return s;
   }
 
-  function updateButton() {
-    var b = document.getElementById("lang-btn");
-    if (!b) return;
-    var other = available.filter(function (l) { return l !== lang; })[0];
-    b.textContent = other ? t("lang.short." + other) : "";
+  // the picker is a plain <select class="lang-select">: one in the header (hidden on narrow screens, where the header has no room)
+  // and one in About > Settings; the look lives here so both pages share it
+  function injectStyle() {
+    if (document.getElementById("i18n-style")) return;
+    var s = document.createElement("style");
+    s.id = "i18n-style";
+    s.textContent = ".lang-select{height:36px;max-width:140px;padding:0 8px;border-radius:10px;border:1.5px solid var(--st-line);" +
+      "background:var(--st-surface);color:var(--st-ink-muted);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer}" +
+      ".lang-select:hover{background:var(--st-surface-2);color:var(--st-ink)}" +
+      "@media(max-width:800px){.st-header #lang-select{display:none}}@media(max-width:520px){.controls #lang-select{display:none}}";
+    document.head.appendChild(s);
   }
-  function wireButton() {
-    var b = document.getElementById("lang-btn");
-    if (!b || b.dataset.i18nWired) return;
-    b.dataset.i18nWired = "1";
-    b.addEventListener("click", function () {
-      var other = available.filter(function (l) { return l !== lang; })[0];
-      if (other) setLang(other);
-    });
+  function fillPicker(sel) {
+    for (var i = 0; i < available.length; i++) {
+      var o = document.createElement("option");
+      o.value = available[i];
+      o.setAttribute("lang", available[i]);
+      o.textContent = NAMES[available[i]] || available[i];
+      sel.appendChild(o);
+    }
+  }
+  function wirePicker() {
+    var picks = document.querySelectorAll(".lang-select");
+    for (var n = 0; n < picks.length; n++) {
+      var sel = picks[n];
+      if (!sel.dataset.i18nWired) {
+        sel.dataset.i18nWired = "1";
+        fillPicker(sel);
+        sel.addEventListener("change", function () { setLang(this.value); });
+      }
+      sel.value = lang;
+    }
+    if (picks.length) injectStyle();
   }
 
   function apply(root) {
@@ -69,8 +113,7 @@
       var aria = el.getAttribute("data-i18n-aria");
       if (aria != null) el.setAttribute("aria-label", t(aria));
     }
-    updateButton();
-    wireButton();
+    wirePicker();
   }
 
   function setLang(l) {
@@ -84,7 +127,7 @@
 
   function onChange(cb) { document.addEventListener("strata:lang", cb); }
 
-  var api = {lang: lang, available: available, t: t, apply: apply, setLang: setLang, onChange: onChange};
+  var api = {lang: lang, available: available, names: NAMES, t: t, apply: apply, setLang: setLang, onChange: onChange};
   window.StrataI18N = api;
 
   apply();                                          // the static HTML above is already parsed
